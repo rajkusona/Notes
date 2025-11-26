@@ -15,7 +15,7 @@ namespace Notes.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Notes");
         }
 
         public IActionResult Privacy()

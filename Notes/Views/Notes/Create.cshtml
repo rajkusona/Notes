@@ -1,0 +1,86 @@
+@model Notes.Models.Note
+
+@{
+    ViewData["Title"] = "Create Note";
+}
+
+<div class="form-container">
+    <div class="container-xl">
+        <div class="form-header">
+            <h1 class="form-title">
+                <i class="bi bi-plus-circle-fill"></i> Create New Note
+            </h1>
+            <p class="form-subtitle">Share your thoughts and ideas</p>
+        </div>
+
+        <div class="form-wrapper">
+            <form asp-action="Create" method="post" class="modern-form">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class="bi bi-exclamation-circle"></i> Oops!</strong> Please fix the errors below.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <!-- Title Field -->
+                <div class="form-group mb-4">
+                    <label asp-for="Title" class="form-label fw-600">
+                        <i class="bi bi-pencil-square"></i> Title
+                    </label>
+                    <input asp-for="Title" 
+                           class="form-control form-control-modern" 
+                           placeholder="Give your note a catchy title..." 
+                           autocomplete="off" />
+                    <span asp-validation-for="Title" class="invalid-feedback d-block"></span>
+                </div>
+
+                <!-- Content Field -->
+                <div class="form-group mb-4">
+                    <label asp-for="Content" class="form-label fw-600">
+                        <i class="bi bi-file-text"></i> Content
+                    </label>
+                    <textarea asp-for="Content" 
+                              class="form-control form-control-modern" 
+                              rows="10" 
+                              placeholder="Write your thoughts, ideas, and notes here..."></textarea>
+                    <span asp-validation-for="Content" class="invalid-feedback d-block"></span>
+                </div>
+
+                <!-- Priority Field -->
+                <div class="form-group mb-4">
+                    <label asp-for="Priority" class="form-label fw-600">
+                        <i class="bi bi-flag-fill"></i> Priority Level
+                    </label>
+                    <div class="priority-selector">
+                        <select asp-for="Priority" class="form-select form-select-modern">
+                            <option value="@Notes.Models.Priority.Low">
+                                <i class="bi bi-circle-fill"></i> Low Priority
+                            </option>
+                            <option value="@Notes.Models.Priority.Medium">
+                                <i class="bi bi-circle-fill"></i> Medium Priority
+                            </option>
+                            <option value="@Notes.Models.Priority.High">
+                                <i class="bi bi-circle-fill"></i> High Priority
+                            </option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Priority" class="invalid-feedback d-block"></span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <a asp-action="Index" class="btn btn-secondary btn-lg btn-modern">
+                        <i class="bi bi-arrow-left"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg btn-modern">
+                        <i class="bi bi-check-circle-fill"></i> Create Note
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

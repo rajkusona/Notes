@@ -1,0 +1,57 @@
+@model Notes.Models.Note
+
+@{
+    ViewData["Title"] = "Delete Note";
+}
+
+<div class="delete-container">
+    <div class="container-xl">
+        <div class="delete-wrapper">
+            <!-- Warning Icon -->
+            <div class="delete-icon-wrapper">
+                <div class="delete-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="delete-header text-center mb-4">
+                <h1 class="delete-title">Delete Note?</h1>
+                <p class="delete-subtitle">This action cannot be undone. Please review the note below before confirming deletion.</p>
+            </div>
+
+            <!-- Note Preview -->
+            <div class="note-preview mb-4">
+                <div class="note-preview-header">
+                    <div>
+                        <h5 class="preview-title">@Model.Title</h5>
+                        <div class="preview-meta">
+                            <span class="meta-item">
+                                <i class="bi bi-calendar-event"></i> Created: @Model.CreatedAt.ToString("MMM dd, yyyy HH:mm")
+                            </span>
+                            <span class="meta-item">
+                                <i class="bi bi-calendar-check"></i> Updated: @Model.UpdatedAt.ToString("MMM dd, yyyy HH:mm")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="note-preview-body">
+                    <p class="preview-content">@Model.Content</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <form asp-action="Delete" method="post" class="delete-form">
+                <input type="hidden" asp-for="Id" />
+                <div class="delete-actions">
+                    <a asp-action="Index" class="btn btn-secondary btn-lg btn-delete-action">
+                        <i class="bi bi-arrow-left"></i> Keep It
+                    </a>
+                    <button type="submit" class="btn btn-danger btn-lg btn-delete-action btn-delete-confirm">
+                        <i class="bi bi-trash-fill"></i> Yes, Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
